@@ -29,17 +29,21 @@ This means that we can read data from any server, but only can do writes and del
 Then run 3 server with different program in different terminal tab:
 
 ```bash
-$ SERVER_PORT=2221 RAFT_NODE_ID=node1 RAFT_PORT=1111 RAFT_VOL_DIR=node_1_data go run ysf/raftsample/cmd/api
-$ SERVER_PORT=2222 RAFT_NODE_ID=node2 RAFT_PORT=1112 RAFT_VOL_DIR=node_2_data go run ysf/raftsample/cmd/api
-$ SERVER_PORT=2223 RAFT_NODE_ID=node3 RAFT_PORT=1113 RAFT_VOL_DIR=node_3_data go run ysf/raftsample/cmd/api
+$ SERVER_PORT=2221 RAFT_NODE_ID=node1 RAFT_PORT=1111 RAFT_VOL_DIR=node_1_data go run cmd
+$ SERVER_PORT=2222 RAFT_NODE_ID=node2 RAFT_PORT=1112 RAFT_VOL_DIR=node_2_data go run cmd
+$ SERVER_PORT=2223 RAFT_NODE_ID=node3 RAFT_PORT=1113 RAFT_VOL_DIR=node_3_data go run cmd
+$ SERVER_PORT=2224 RAFT_NODE_ID=node4 RAFT_PORT=1114 RAFT_VOL_DIR=node_4_data go run cmd
+$ SERVER_PORT=2225 RAFT_NODE_ID=node5 RAFT_PORT=1115 RAFT_VOL_DIR=node_5_data go run cmd
 ```
 
 Or using prebuilt executable:
 
 ```bash
-$ SERVER_PORT=2221 RAFT_NODE_ID=node1 RAFT_PORT=1111 RAFT_VOL_DIR=node_1_data ./raftsample
-$ SERVER_PORT=2222 RAFT_NODE_ID=node2 RAFT_PORT=1112 RAFT_VOL_DIR=node_2_data ./raftsample
-$ SERVER_PORT=2223 RAFT_NODE_ID=node3 RAFT_PORT=1113 RAFT_VOL_DIR=node_3_data ./raftsample
+$ SERVER_PORT=2221 RAFT_NODE_ID=node1 RAFT_PORT=1111 RAFT_VOL_DIR=node_1_data go run cmd/main.go
+$ SERVER_PORT=2222 RAFT_NODE_ID=node2 RAFT_PORT=1112 RAFT_VOL_DIR=node_2_data go run cmd/main.go
+$ SERVER_PORT=2223 RAFT_NODE_ID=node3 RAFT_PORT=1113 RAFT_VOL_DIR=node_3_data go run cmd/main.go
+$ SERVER_PORT=2224 RAFT_NODE_ID=node4 RAFT_PORT=1114 RAFT_VOL_DIR=node_4_data go run cmd/main.go
+$ SERVER_PORT=2225 RAFT_NODE_ID=node5 RAFT_PORT=1115 RAFT_VOL_DIR=node_5_data go run cmd/main.go
 ```
 
 ## Creating clusters

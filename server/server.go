@@ -6,7 +6,6 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"net/http"
-	_ "net/http/pprof"
 	"time"
 	"ysf/raftsample/server/raft_handler"
 	"ysf/raftsample/server/store_handler"
@@ -19,7 +18,7 @@ type srv struct {
 	echo          *echo.Echo
 }
 
-// Start start the server
+// Start the server
 func (s srv) Start() error {
 	return s.echo.StartServer(&http.Server{
 		Addr:         s.listenAddress,

@@ -22,9 +22,12 @@ func (h handler) Delete(eCtx echo.Context) error {
 	}
 
 	if h.raft.State() != raft.Leader {
+		fmt.Println("I'm follower")
 		return eCtx.JSON(http.StatusUnprocessableEntity, map[string]interface{}{
 			"error": "not the leader",
 		})
+	} else {
+		fmt.Println("I'm leader")
 	}
 
 	payload := fsm.CommandPayload{

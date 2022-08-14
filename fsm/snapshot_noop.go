@@ -7,10 +7,10 @@ import (
 // snapshotNoop handle noop snapshot
 type snapshotNoop struct{}
 
-// Persist persist to disk. Return nil on success, otherwise return error.
+// Persist to disk. Return nil on success, otherwise return error.
 func (s snapshotNoop) Persist(_ raft.SnapshotSink) error { return nil }
 
-// Release release the lock after persist snapshot.
+// Release the lock after persist snapshot.
 // Release is invoked when we are finished with the snapshot.
 func (s snapshotNoop) Release() {}
 

@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// Get will fetched data from badgerDB where the raft use to store data.
+// Get will fetch data from badgerDB where the raft use to store data.
 // It can be done in any raft server, making the Get returned eventual consistency on read.
 func (h handler) Get(eCtx echo.Context) error {
 	var key = strings.TrimSpace(eCtx.Param("key"))

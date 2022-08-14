@@ -8,11 +8,13 @@ import (
 	"io"
 	"os"
 	"strings"
+	"ysf/raftsample/types"
 )
 
 // badgerFSM raft.FSM implementation using badgerDB
 type badgerFSM struct {
-	db *badger.DB
+	db   *badger.DB
+	conf *types.Config
 }
 
 // get fetch data from badgerDB
@@ -106,7 +108,7 @@ func (b badgerFSM) Apply(log *raft.Log) interface{} {
 		case "SET":
 			return &ApplyResponse{
 				Error: b.set(payload.Key, payload.Value),
-				Data:  payload.Value,
+				Data:  b.conf.Raft.NodeId,
 			}
 		case "GET":
 			data, err := b.get(payload.Key)
@@ -177,8 +179,9 @@ func (b badgerFSM) Restore(rClose io.ReadCloser) error {
 }
 
 // NewBadger raft.FSM implementation using badgerDB
-func NewBadger(badgerDB *badger.DB) raft.FSM {
+func NewBadger(badgerDB *badger.DB, conf *types.Config) raft.FSM {
 	return &badgerFSM{
-		db: badgerDB,
+		db:   badgerDB,
+		conf: conf,
 	}
 }

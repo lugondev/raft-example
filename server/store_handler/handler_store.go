@@ -35,9 +35,12 @@ func (h handler) Store(eCtx echo.Context) error {
 	}
 
 	if h.raft.State() != raft.Leader {
+		fmt.Println("I'm follower")
 		return eCtx.JSON(http.StatusUnprocessableEntity, map[string]interface{}{
 			"error": "not the leader",
 		})
+	} else {
+		fmt.Println("I'm leader")
 	}
 
 	payload := fsm.CommandPayload{
@@ -60,7 +63,8 @@ func (h handler) Store(eCtx echo.Context) error {
 		})
 	}
 
-	_, ok := applyFuture.Response().(*fsm.ApplyResponse)
+	res, ok := applyFuture.Response().(*fsm.ApplyResponse)
+	fmt.Println("data res:", res)
 	if !ok {
 		return eCtx.JSON(http.StatusUnprocessableEntity, map[string]interface{}{
 			"error": fmt.Sprintf("error response is not match apply response"),

@@ -13,25 +13,8 @@ import (
 	"time"
 	"ysf/raftsample/fsm"
 	"ysf/raftsample/server"
+	"ysf/raftsample/types"
 )
-
-// configRaft configuration for raft node
-type configRaft struct {
-	NodeId    string `mapstructure:"node_id"`
-	Port      int    `mapstructure:"port"`
-	VolumeDir string `mapstructure:"volume_dir"`
-}
-
-// configServer configuration for HTTP server
-type configServer struct {
-	Port int `mapstructure:"port"`
-}
-
-// config configuration
-type config struct {
-	Server configServer `mapstructure:"server"`
-	Raft   configRaft   `mapstructure:"raft"`
-}
 
 const (
 	serverPort = "SERVER_PORT"
@@ -78,11 +61,11 @@ func main() {
 		return
 	}
 
-	conf := config{
-		Server: configServer{
+	conf := types.Config{
+		Server: types.ConfigServer{
 			Port: v.GetInt(serverPort),
 		},
-		Raft: configRaft{
+		Raft: types.ConfigRaft{
 			NodeId:    v.GetString(raftNodeId),
 			Port:      v.GetInt(raftPort),
 			VolumeDir: v.GetString(raftVolDir),
@@ -111,7 +94,7 @@ func main() {
 	raftConf.LocalID = raft.ServerID(conf.Raft.NodeId)
 	raftConf.SnapshotThreshold = 1024
 
-	fsmStore := fsm.NewBadger(badgerDB)
+	fsmStore := fsm.NewBadger(badgerDB, &conf)
 
 	store, err := raftboltdb.NewBoltStore(filepath.Join(conf.Raft.VolumeDir, "raft.dataRepo"))
 	if err != nil {
