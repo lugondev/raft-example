@@ -26,7 +26,7 @@ This means that we can read data from any server, but only can do writes and del
 
 `git clone` this project or download prebuilt executable files in Release, then set three (3) different config, for example:
 
-Then run 3 server with different program in different terminal tab:
+Then run 5 server with different program in different terminal tab:
 
 ```bash
 $ SERVER_PORT=2221 RAFT_NODE_ID=node1 RAFT_PORT=1111 RAFT_VOL_DIR=node_1_data go run cmd
